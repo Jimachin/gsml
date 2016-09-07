@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-from os.path import join
-from survey.settings import BASE_DIR
 
 DEBUG = False
 
