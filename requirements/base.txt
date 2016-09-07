@@ -3,4 +3,5 @@ djangorestframework==3.4.6
 django-widget-tweaks==1.4.1
 numpy==1.11.1
 pandas==0.18.1
+SciPy
 scikit-learn
