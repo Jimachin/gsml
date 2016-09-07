@@ -1,0 +1,16 @@
+*.pyc
+*.pyo
+*.DS_Store
+/static/
+/media/
+/.idea
+/.directory
+.pydevproject
+/.settings/
+/local_settings.py
+*.mo
+*.orig
+*.project
+*.db
+.~
+*.sqlite3

@@ -1,0 +1,109 @@
+{% load widget_tweaks %}
+<!--DOCTYPE html-->
+
+<html lang="en">
+<head>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.min.css">
+
+
+</head>
+<body>
+<div class="container">
+    <div class="page-header">
+        <h1>Estimate
+            <small style="border-bottom: solid #A30000 1px">Unit Price</small>
+        </h1>
+    </div>
+    <div class="row" style="padding: 20px">
+        <div class="col-md-6 col-sm-6" style="border-right: solid #A30000 1px">
+            <form action="/estimate/" method="post"
+                  class="form-horizontal" role="form">{% csrf_token %}
+                <div class="form-group">
+                    <div class="col-md-6 col-md-offset-2">
+                        <input type="text" id="disabledTextInput" class="form-control"
+                               placeholder="Product Code : 23633" disabled>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-6 col-md-offset-2">
+                        <input type="text" id="receptor_rut" class="form-control"
+                               placeholder="receptor_rut" name="receptor_rut">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class='col-md-6 col-md-offset-2'>
+                        <div class="input-group date " data-provide="datepicker">
+                            <input type="text" class="form-control datepicker" placeholder="mm/dd/yyyy"
+                                   name="date_value">
+                            <div class="input-group-addon">
+                                <span class="glyphicon glyphicon-th"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <script !src="">
+                        $('.datepicker').datepicker({
+                            format: 'mm/dd/yyyy',
+                            startDate: '-3d'
+                        });
+
+                    </script>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-6 col-sm-offset-2">
+                        <button type="submit" class="btn btn-primary">Estimate</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="col-md-3 col-sm-3 col-sm-offset-2">
+            <div class="panel panel-primary">
+                <div class="panel-heading ">Predictions for Rut: {{ rutPredictions }}</div>
+
+                <div class="panel-body text-center">
+                    <label>Date: {{ date_value }}</label>
+                </div>
+                <div class="panel-body text-center">
+                    <label>{{ predictions }}</label>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<footer style="padding-top: 100px">
+
+    <div class="container">
+        <div class="row text-right">
+            <address>
+                <strong>© 2016 Gosocket Corp SpA.</strong><br>
+                1355 Market Street, Suite 900<br>
+                San Francisco, CA 94103<br>
+                <abbr title="Phone">P:</abbr> (+56 2) 28204219
+            </address>
+            <address>
+                <strong>GoSocket Machine Learning</strong><br>
+                <a href="mailto:#">gosocketML@gosocket.net</a>
+            </address>
+        </div>
+    </div>
+
+</footer>
+
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min.js"></script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/js/bootstrap.min.js"></script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>
+
+</body>
+</html>
