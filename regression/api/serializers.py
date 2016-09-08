@@ -5,6 +5,8 @@ import pandas as pd
 
 from rest_framework.serializers import (HyperlinkedIdentityField, ModelSerializer, SerializerMethodField,
                                         ValidationError)
+
+from Gosocket.settings import MODELS_PATH
 from regression.models import Regression_ideal
 
 # this is to put hyperlink , instead of each value
@@ -17,6 +19,7 @@ urlHyperlink = HyperlinkedIdentityField(
 
 class RegressionListAllSerializer(ModelSerializer):
     url = urlHyperlink
+
     class Meta:
         model = Regression_ideal
         fields = ('receptor_rut', 'url')
@@ -28,15 +31,16 @@ class RegressionPredictionsSerializer(ModelSerializer):
     product_name = SerializerMethodField()
 
     class Meta:
-        model = Regression_ideal        
+        model = Regression_ideal
         fields = ('receptor_rut', 'product_code', 'product_name', 'predictions')
 
     def get_predictions(self, obj):
         date_value = datetime.datetime.now().date()
 
-        date_new_value = (pd.Timestamp(date_value,  tz='UTC') - pd.Timestamp(obj.date_min,  tz='UTC')) / np.timedelta64(1, 'D')
+        date_new_value = (pd.Timestamp(date_value, tz='UTC') - pd.Timestamp(obj.date_min, tz='UTC')) / np.timedelta64(1,
+                                                                                                                      'D')
 
-        with open('C:/Users/gosocket/Documents/Gosocket/Trabajo/Django_Api/Django/models/' + obj.receptor_rut + '.pkl','rb') as f:
+        with open(MODELS_PATH + obj.receptor_rut + '.pkl', 'rb') as f:
             clf_Text = pickle.load(f)
             predictions = clf_Text.predict(date_new_value)
 
