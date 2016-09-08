@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'regression',
     'widget_tweaks',
+    'raven.contrib.django.raven_compat',
 ]
 
 MIDDLEWARE = [
