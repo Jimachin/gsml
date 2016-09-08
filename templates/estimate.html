@@ -1,4 +1,5 @@
-{% load widget_tweaks %}
+{% load widget_tweaks gosocket_extras %}
+
 <!--DOCTYPE html-->
 
 <html lang="en">
@@ -72,7 +73,7 @@
                 </div>
 
                 <div class="panel-body text-center">
-                    <label>$ {{ predictions }}</label>
+                    <label>$ {{ predictions|text_by_point }}</label>
                 </div>
             </div>
 
