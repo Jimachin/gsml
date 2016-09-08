@@ -3,7 +3,7 @@ import logging
 import numpy as np
 import pandas as pd
 from django import forms
-
+import locale
 from Gosocket import settings
 from .forms import EstimateForm
 from django.shortcuts import render
@@ -13,6 +13,8 @@ logger = logging.getLogger(__name__)
 
 
 def get_values(request):
+    # locale.setlocale(locale.LC_NUMERIC, 'es_ES.utf-8')
+    locale.setlocale(locale.LC_ALL, locale="Spanish")
     try:
         # if this is a POST request we need to process the form data
         context = {"rutPredictions": "12345678-k", "predictions": 0, "date_value": "mm/dd/yy"}
@@ -33,13 +35,14 @@ def get_values(request):
                                                                                                                     'D')
                     with open(settings.MODELS_PATH + receptor_rut + '.pkl', 'rb') as f:
                         clf = pickle.load(f)
-                        predictions = clf.predict(date_new_value)
+                        predictions = np.round(clf.predict(date_new_value), 0)[0]
 
                         print("Entro al post", date_value, receptor_rut, date_new_value)
 
-                    context = {"rutPredictions": query.receptor_rut, "predictions": np.round(predictions, 2)[0],
-                               "date_value": date_value,
-                               'form_view': form_view}
+                    context = {"rutPredictions": query.receptor_rut,
+                               # "predictions": locale.format("%.*f", (0, predictions), True),
+                               "predictions": locale.format("%d", predictions, grouping=True),
+                               "date_value": date_value, 'form_view': form_view}
                     return render(request, 'estimate.html', context)
 
                 except Regression_ideal.DoesNotExist:
