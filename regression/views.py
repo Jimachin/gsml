@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 
 def get_values(request):
     # locale.setlocale(locale.LC_NUMERIC, 'es_ES.utf-8')
-    locale.setlocale(locale.LC_ALL, locale="Spanish")
+    locale.setlocale(locale.LC_ALL, locale="es")
     try:
         # if this is a POST request we need to process the form data
         context = {"rutPredictions": "12345678-k", "predictions": 0, "date_value": "mm/dd/yy"}

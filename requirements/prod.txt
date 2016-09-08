@@ -19,7 +19,3 @@ boto==2.38.0
 # Mailgun Support
 # ---------------
 # django-mailgun==0.8.0
-
-#locale — Internationalization services
-# ---------------
-locale
