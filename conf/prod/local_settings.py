@@ -11,6 +11,8 @@ TEMPLATE_DEBUG = DEBUG
 ALLOWED_HOSTS = ['gomachlearning.cloudapp.net']
 
 MODELS_PATH = '/home/azureuser/Gosocket_project/models/'
+CSV_PATH = '/home/azureuser/Gosocket_project/CSV/'
+
 
 RAVEN_CONFIG = {
     'dsn': 'https://aca622d180cc489fa0c47549aa259a2d:4f4f4ea90453459bbd6e1850f73bd15f@sentry.io/97703',

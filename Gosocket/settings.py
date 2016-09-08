@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'regression',
     'widget_tweaks',
     'raven.contrib.django.raven_compat',
+    'Gosocket'
 ]
 
 MIDDLEWARE = [
@@ -148,6 +149,7 @@ REST_FRAMEWORK = {
 }
 
 MODELS_PATH = None
+CSV_PATH = None
 
 try:
     from local_settings import *
