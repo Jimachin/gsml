@@ -4,10 +4,8 @@ import numpy as np
 import pandas as pd
 from django import forms
 from .forms import EstimateForm
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Regression_ideal
-
-
 
 
 def get_values(request):
@@ -15,8 +13,9 @@ def get_values(request):
     context = {"rutPredictions": "12345678-k", "predictions": 0, "date_value": "mm/dd/yy"}
     if request.method == 'POST':
         form_view = EstimateForm(request.POST)
-        print("POST")
+
         if form_view.is_valid():
+
             receptor_rut = form_view.cleaned_data["receptor_rut"]
             date_value = form_view.cleaned_data["date_value"]
 
@@ -26,18 +25,19 @@ def get_values(request):
                 query = Regression_ideal.objects.get(receptor_rut=receptor_rut)
                 date_new_value = (pd.Timestamp(date_value, tz='UTC') - pd.Timestamp(query.date_min,
                                                                                     tz='UTC')) / np.timedelta64(1, 'D')
-
                 with open(
-                                        'C:/Users/Havy_DCC/Dropbox/Universidad/Python/PyCharm/Django/models/models/' + receptor_rut + '.pkl',
-                        'rb') as f:
+                                        'C:/Users/Havy_DCC/Google Drive/Gosocket/Trabajo/Python/Django_Api/GoSocket/models/' + receptor_rut + '.pkl',
+                                        'rb') as f:
                     clf = pickle.load(f)
                     predictions = clf.predict(date_new_value)
 
                     print("Entro al post", date_value, receptor_rut, date_new_value)
 
-                context = {"rutPredictions": query.receptor_rut, "predictions": np.round(predictions, 2)[0], "date_value": date_value,
+                context = {"rutPredictions": query.receptor_rut, "predictions": np.round(predictions, 2)[0],
+                           "date_value": date_value,
                            'form_view': form_view}
                 return render(request, 'estimate.html', context)
+
             except Regression_ideal.DoesNotExist:
                 form_view.full_clean()
                 raise forms.ValidationError("You have forgotten about Fred!")
@@ -47,5 +47,6 @@ def get_values(request):
     # if a GET (or any other method) we'll create a blank form
     else:
         form_view = EstimateForm()
-        context = {"rutPredictions": "12345678-k", "predictions": 0.00, "date_value": " dd/mm/yy", 'form_view': form_view}
+        context = {"rutPredictions": "12345678-k", "predictions": 0.00, "date_value": " dd/mm/yy",
+                   'form_view': form_view}
     return render(request, 'estimate.html', context)

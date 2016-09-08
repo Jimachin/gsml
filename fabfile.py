@@ -20,9 +20,9 @@ def prod():
     env.hosts = ['gomachlearning.cloudapp.net']
     env.branch = 'master'
     env.repo = 'https://github.com/Jimachin/gsml.git'
-    env.project_root = '/home/ubuntu/src/%(project_name)s/' % env
-    env.logs = '/home/ubuntu/logs/%(project_name)s/' % env
-    env.venv = '/home/ubuntu/venvs/%(project_name)s/' % env
+    env.project_root = '/home/azureuser/src/%(project_name)s/' % env
+    env.logs = '/home/azureuser/logs/%(project_name)s/' % env
+    env.venv = '/home/azureuser/venvs/%(project_name)s/' % env
 
 
 #--------------------------------------
@@ -91,6 +91,7 @@ def setup_requirements():
     sudo("apt-get install git -y")
     sudo("apt-get install python-imaging -y")
     sudo("apt-get install libjpeg-dev libjpeg62 zlib1g-dev libffi-dev libfreetype6 libfreetype6-dev python2.7-dev -y")
+    sudo("apt-get install libblas-dev liblapack-dev gfortran -y")
     sudo("apt-get install python2.7 -y")
     sudo("apt-get install python-setuptools python-pip -y")
     sudo("apt-get install python-virtualenv")
