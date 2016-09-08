@@ -3,6 +3,8 @@ import datetime
 import numpy as np
 import pandas as pd
 from django import forms
+
+from Gosocket import settings
 from .forms import EstimateForm
 from django.shortcuts import render, get_object_or_404
 from .models import Regression_ideal
@@ -25,9 +27,7 @@ def get_values(request):
                 query = Regression_ideal.objects.get(receptor_rut=receptor_rut)
                 date_new_value = (pd.Timestamp(date_value, tz='UTC') - pd.Timestamp(query.date_min,
                                                                                     tz='UTC')) / np.timedelta64(1, 'D')
-                with open(
-                                        'C:/Users/Havy_DCC/Google Drive/Gosocket/Trabajo/Python/Django_Api/GoSocket/models/' + receptor_rut + '.pkl',
-                                        'rb') as f:
+                with open(settings.MODELS_PATH + receptor_rut + '.pkl', 'rb') as f:
                     clf = pickle.load(f)
                     predictions = clf.predict(date_new_value)
 

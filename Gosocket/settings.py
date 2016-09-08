@@ -150,3 +150,6 @@ try:
     from local_settings import *
 except ImportError:
     pass
+
+MODELS_PATH = None
+
