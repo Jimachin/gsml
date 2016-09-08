@@ -10,7 +10,7 @@ class EstimateForm(forms.Form):
 
     def clean_receptor_rut(self):
         receptor_rut = self.cleaned_data['receptor_rut']
-        query = Regression_ideal.objects.get(receptor_rut=receptor_rut)
-        if not query.exist():
+        query = Regression_ideal.objects.filter(receptor_rut=receptor_rut)
+        if not query.exists():
             raise forms.ValidationError("Rut not exist")
         return receptor_rut
